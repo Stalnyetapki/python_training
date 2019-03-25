@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
+from group import Group
 
 class UntitledTestCase(unittest.TestCase):
     def setUp(self):
@@ -23,15 +24,15 @@ class UntitledTestCase(unittest.TestCase):
     def open_groups_page(self, driver):
         driver.find_element_by_name("new").click()
 
-    def create_group(self, driver, name, header, footer):
+    def create_group(self, driver, group):
         # init group creation
         driver.find_element_by_name("group_name").click()
         # fill group form
-        driver.find_element_by_name("group_name").send_keys(name)
+        driver.find_element_by_name("group_name").send_keys(group.name)
         driver.find_element_by_name("group_header").click()
-        driver.find_element_by_name("group_header").send_keys(header)
+        driver.find_element_by_name("group_header").send_keys(group.header)
         driver.find_element_by_name("group_footer").click()
-        driver.find_element_by_name("group_footer").send_keys(footer)
+        driver.find_element_by_name("group_footer").send_keys(group.footer)
         # submit group creation
         driver.find_element_by_name("submit").click()
 
@@ -46,7 +47,7 @@ class UntitledTestCase(unittest.TestCase):
         self.open_home_page(driver)
         self.login(driver, username="admin", password="secret")
         self.open_groups_page(driver)
-        self.create_group(driver, name="sdadsadas", header="dsadsadas", footer="dsadsadsa")
+        self.create_group(driver, Group(name="sdadsadas", header="dsadsadas", footer="dsadsadsa"))
         self.return_to_groups_page(driver)
         self.logout(driver)
 
@@ -55,7 +56,7 @@ class UntitledTestCase(unittest.TestCase):
         self.open_home_page(driver)
         self.login(driver, username="admin", password="secret")
         self.open_groups_page(driver)
-        self.create_group(driver, name="", header="", footer="")
+        self.create_group(driver, Group(name="", header="", footer=""))
         self.return_to_groups_page(driver)
         self.logout(driver)
 
