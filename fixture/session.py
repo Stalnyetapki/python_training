@@ -10,11 +10,14 @@ class SessionHelper:
         # login
         self.app.open_home_page()
         driver.find_element_by_name("user").click()
+        driver.find_element_by_name("user").clear()
         driver.find_element_by_name("user").send_keys(username)
+        driver.find_element_by_name("pass").click()
+        driver.find_element_by_name("pass").clear()
         driver.find_element_by_name("pass").send_keys(password)
         driver.find_element_by_xpath(
             ".//*[@id='LoginForm']/input[3]").click()
 
     def logout(self):
         driver = self.app.driver
-        driver.find_element_by_link_text("Выйти").click()
+        driver.find_element_by_xpath("//*[@id='top']/form/a").click()
