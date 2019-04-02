@@ -1,5 +1,6 @@
 from selenium import webdriver
 from fixture.session import SessionHelper
+from  fixture.group import GroupHelper
 
 
 class Application:
@@ -8,36 +9,11 @@ class Application:
         self.driver = webdriver.Firefox(executable_path='C:/projects/drivers/geckodriver/geckodriver.exe')
         self.driver.implicitly_wait(30)
         self.session = SessionHelper(self)
+        self.group = GroupHelper(self)
 
     def open_home_page(self):
         driver = self.driver
         driver.get("http://addressbook:81/group.php")
 
-    def open_groups_page(self):
-        driver = self.driver
-        driver.find_element_by_name("new").click()
-
-    def create_group(self, group):
-        driver = self.driver
-        self.open_groups_page()
-        # init group creation
-        driver.find_element_by_name("group_name").click()
-        # fill group form
-        driver.find_element_by_name("group_name").send_keys(group.name)
-        driver.find_element_by_name("group_header").click()
-        driver.find_element_by_name("group_header").send_keys(group.header)
-        driver.find_element_by_name("group_footer").click()
-        driver.find_element_by_name("group_footer").send_keys(group.footer)
-        # submit group creation
-        driver.find_element_by_name("submit").click()
-        self.return_to_groups_page()
-
-    def return_to_groups_page(self):
-        driver = self.driver
-        driver.find_element_by_link_text("group page").click()
-
     def destroy(self):
         self.driver.quit()
-
-
-
