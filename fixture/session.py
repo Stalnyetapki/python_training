@@ -21,3 +21,4 @@ class SessionHelper:
     def logout(self):
         driver = self.app.driver
         driver.find_element_by_xpath("//*[@id='top']/form/a").click()
+        driver.find_element_by_xpath("//*[@id='top']/form/a").click()
