@@ -72,7 +72,7 @@ class GroupHelper:
         self.open_groups_page()
         groups = []
         for element in driver.find_elements_by_css_selector("form>input[type='checkbox']"):
-            text = element.text
+            text = element.get_attribute("title")[8:-1]
             id = element.get_attribute("value")
             groups.append(Group(name=text, id=id))
         return groups
