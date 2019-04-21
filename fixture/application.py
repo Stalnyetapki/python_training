@@ -1,6 +1,7 @@
 from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.group import GroupHelper
+from fixture.contact import ContactHelper
 
 
 class Application:
@@ -9,17 +10,18 @@ class Application:
         self.driver = webdriver.Firefox(executable_path='C:/projects/drivers/geckodriver/geckodriver.exe')
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
+        self.contact = ContactHelper(self)
 
     def is_valid(self):
         try:
-            self.driver.current_url
+            self.driver.current_url()
             return True
         except:
             return False
 
     def open_home_page(self):
         driver = self.driver
-        driver.get("http://addressbook:81/group.php")
+        driver.get("http://addressbook:81")
 
     def destroy(self):
         self.driver.quit()
