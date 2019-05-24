@@ -10,8 +10,7 @@ class Application:
         if browser == "firefox":
             self.driver = webdriver.Firefox()
         elif browser == "chrome":
-            self.driver = webdriver.Ch
-            rome()
+            self.driver = webdriver.Chrome()
         elif browser == "ie":
             self.driver = webdriver.Ie()
         else:
